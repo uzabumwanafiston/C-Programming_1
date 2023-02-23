@@ -1,25 +1,49 @@
-#include <stdio.h>
+#include "main.h"
 /**
- * main - main block
- * Description: computes and prints the sum of all the multiples of 3 or
- * 5 below 1024 (excluded), followed by a new line
- * Return: 0
+ * print_number - Prints an integer
+ * @n: The integer to print
+ *
+ * Return: void
+ */
+void print_number(unsigned long n)
+{
+    unsigned long i = 1;
+
+    while (i <= n / 10)
+        i *= 10;
+
+    while (i > 0)
+    {
+        _putchar((n / i) % 10 + '0');
+        i /= 10;
+    }
+}
+
+/**
+ * main - Entry point
+ *
+ * Return: Always 0
  */
 int main(void)
 {
-	int i = 0;
-	unsigned long int a = 0, b = 1, next = 0;
+    unsigned long a = 1, b = 2, c, i;
 
-	while (i < 98)
-	{
-		next = a + b;
-		a = b;
-		b = next;
-		printf("%lu", next);
-		if (i < 97)
-			printf(", ");
-		i++;
-	}
-	putchar('\n');
-	return (0);
+    print_number(a);
+    _putchar(',');
+    _putchar(' ');
+    print_number(b);
+
+    for (i = 2; i < 98; i++)
+    {
+        c = a + b;
+        a = b;
+        b = c;
+
+        _putchar(',');
+        _putchar(' ');
+        print_number(c);
+    }
+
+    _putchar('\n');
+    return (0);
 }
