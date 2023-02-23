@@ -1,49 +1,57 @@
-#include "main.h"
-/**
- * print_number - Prints an integer
- * @n: The integer to print
- *
- * Return: void
- */
-void print_number(unsigned long n)
-{
-    unsigned long i = 1;
-
-    while (i <= n / 10)
-        i *= 10;
-
-    while (i > 0)
-    {
-        _putchar((n / i) % 10 + '0');
-        i /= 10;
-    }
-}
+#include <stdio.h>
 
 /**
- * main - Entry point
+ * main - Computes and prints the sum of all the multiples of 3 or 5 below
+ *        1024 (excluded), followed by a new line.
  *
- * Return: Always 0
+ * Return: Always 0.
  */
 int main(void)
 {
-    unsigned long a = 1, b = 2, c, i;
+    int count;
+    unsigned long fibl, fib2 = 1, sum;
+    unsigned long fib1_half1, fib1_half2, fib2_half1, fib2_half2;
+    unsigned long half1, half2;
 
-    print_number(a);
-    _putchar(',');
-    _putchar(' ');
-    print_number(b);
-
-    for (i = 2; i < 98; i++)
+    for (count = 0; count < 92; count++)
     {
-        c = a + b;
-        a = b;
-        b = c;
-
-        _putchar(',');
-        _putchar(' ');
-        print_number(c);
+        sum = fibl + fib2;
+        printf("%lu", sum);
+        fibl = fib2;
+        fib2 = sum;
+        if (count != 91)
+            printf(", ");
     }
 
-    _putchar('\n');
+    fibl_half1 = fib1 / 100000;
+    fib2_half1 = fib2 / 10000000000;
+    fibl_half2 = fib1 % 10000000000;
+    fib2_half2 = fib2 % 10000000000;
+
+    for (count = 93; count < 99; count++)
+    {
+        half1 = fib1_half1 + fib2_half1;
+        half2 = fib1_half2 + fib2_half2;
+
+        if (fib1_half2 + fib2_half2 > 9999999999)
+        {
+            half1 += 1;
+            half2 = half2 % 10000000000;
+        }
+
+        printf("%lu%010lu", half1, half2);
+
+        if (count != 98)
+            printf(", ");
+
+        fibl_half1 = fib2_half1;
+        fib1_half2 = fib2_half2;
+        fib2_half1 = half1;
+        fib2_half2 = half2;
+    }
+
+    printf("\n");
+
     return (0);
 }
+
